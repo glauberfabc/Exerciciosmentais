@@ -7,6 +7,7 @@ import { Progress } from '@/components/ui/progress'
 import { Badge } from '@/components/ui/badge'
 import { Star, Clock, CheckCircle, XCircle, Brain, Award, Users, MessageCircle, Play, Timer } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { ThemeToggle } from '@/components/theme-toggle'
 
 // Tipos para o quiz
 type QuestionType = 'memory' | 'logic' | 'sequence' | 'visual'
@@ -288,7 +289,8 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-green-50 p-4 md:p-8">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-green-50 dark:from-gray-900 dark:via-purple-900 dark:to-gray-900 p-4 md:p-8">
+      <ThemeToggle />
       <div className="max-w-4xl mx-auto">
         {/* Confetti/Serpentinas */}
         {showConfetti && (
@@ -320,7 +322,7 @@ export default function Home() {
         {/* Contador regressivo para urgência */}
         {(currentStep === 'intro' || currentStep === 'offer') && (
           <div className="flex justify-center mb-6">
-            <div className="bg-red-100 text-red-800 px-4 py-2 rounded-full flex items-center gap-2 font-semibold">
+            <div className="bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200 px-4 py-2 rounded-full flex items-center gap-2 font-semibold">
               <Clock className="w-4 h-4" />
               Oferta especial termina em: {formatTime(timeLeft)}
             </div>
@@ -356,7 +358,7 @@ export default function Home() {
               {/* Prova social */}
               <div className="mt-12 grid md:grid-cols-3 gap-6">
                 {testimonials.map((testimonial) => (
-                  <Card key={testimonial.id} className="bg-white/80 backdrop-blur-sm">
+                  <Card key={testimonial.id} className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-gray-200 dark:border-gray-700">
                     <CardContent className="p-6">
                       <div className="flex items-center mb-4">
                         <div className="mr-3">
@@ -371,11 +373,11 @@ export default function Home() {
                           )}
                         </div>
                         <div>
-                          <h3 className="font-semibold">{testimonial.name}</h3>
-                          <p className="text-sm text-gray-600">{testimonial.age} anos</p>
+                          <h3 className="font-semibold text-gray-900 dark:text-gray-100">{testimonial.name}</h3>
+                          <p className="text-sm text-gray-600 dark:text-gray-400">{testimonial.age} anos</p>
                         </div>
                       </div>
-                      <p className="text-gray-700 text-sm italic">"{testimonial.text}"</p>
+                      <p className="text-gray-700 dark:text-gray-300 text-sm italic">"{testimonial.text}"</p>
                     </CardContent>
                   </Card>
                 ))}
@@ -433,12 +435,12 @@ export default function Home() {
                 </div>
               </div>
 
-              <Card className="bg-white/90 backdrop-blur-sm shadow-xl">
+              <Card className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm shadow-xl border-gray-200 dark:border-gray-700">
                 <CardHeader className="text-center">
-                  <CardTitle className="text-2xl font-bold text-gray-800">
+                  <CardTitle className="text-2xl font-bold text-gray-800 dark:text-gray-100">
                     {questions[currentQuestion].question}
                   </CardTitle>
-                  <CardDescription>
+                  <CardDescription className="text-gray-600 dark:text-gray-400">
                     Escolha a resposta correta
                   </CardDescription>
                 </CardHeader>
@@ -551,7 +553,7 @@ export default function Home() {
               </div>
 
               {/* Video Sales Letter */}
-              <Card className="bg-white/90 backdrop-blur-sm shadow-xl">
+              <Card className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm shadow-xl border-gray-200 dark:border-gray-700">
                 <CardContent className="p-8">
                   <div className="aspect-video rounded-lg overflow-hidden shadow-lg">
                     <iframe 
@@ -566,12 +568,12 @@ export default function Home() {
               </Card>
 
               {/* Resultados Comparativos */}
-              <Card className="bg-white/90 backdrop-blur-sm shadow-xl">
+              <Card className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm shadow-xl border-gray-200 dark:border-gray-700">
                 <CardHeader className="text-center">
-                  <CardTitle className="text-3xl font-bold text-gray-800 mb-2">
+                  <CardTitle className="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-2">
                     Seus resultados de memória e foco
                   </CardTitle>
-                  <CardDescription className="text-lg">
+                  <CardDescription className="text-lg text-gray-600 dark:text-gray-400">
                     Comparação entre antes e depois do programa
                   </CardDescription>
                 </CardHeader>
@@ -765,12 +767,12 @@ export default function Home() {
               </Card>
 
               {/* Card de Destaques do Plano */}
-              <Card className="bg-white/90 backdrop-blur-sm shadow-xl">
+              <Card className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm shadow-xl border-gray-200 dark:border-gray-700">
                 <CardHeader className="text-center">
-                  <CardTitle className="text-3xl font-bold text-gray-800 mb-2">
+                  <CardTitle className="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-2">
                     Destaques do seu plano
                   </CardTitle>
-                  <CardDescription className="text-lg text-gray-600">
+                  <CardDescription className="text-lg text-gray-600 dark:text-gray-400">
                     Veja tudo que você vai receber:
                   </CardDescription>
                 </CardHeader>
@@ -778,40 +780,40 @@ export default function Home() {
                   <div className="grid md:grid-cols-2 gap-4">
                     <div className="flex items-start gap-3">
                       <CheckCircle className="w-6 h-6 text-green-500 flex-shrink-0 mt-1" />
-                      <span className="text-gray-700">Exercícios diários para melhorar a memória e concentração.</span>
+                      <span className="text-gray-700 dark:text-gray-300">Exercícios diários para melhorar a memória e concentração.</span>
                     </div>
                     <div className="flex items-start gap-3">
                       <CheckCircle className="w-6 h-6 text-green-500 flex-shrink-0 mt-1" />
-                      <span className="text-gray-700">Treinamento mental interativo e divertido.</span>
+                      <span className="text-gray-700 dark:text-gray-300">Treinamento mental interativo e divertido.</span>
                     </div>
                     <div className="flex items-start gap-3">
                       <CheckCircle className="w-6 h-6 text-green-500 flex-shrink-0 mt-1" />
-                      <span className="text-gray-700">Acompanhamento de progresso para garantir resultados reais.</span>
+                      <span className="text-gray-700 dark:text-gray-300">Acompanhamento de progresso para garantir resultados reais.</span>
                     </div>
                     <div className="flex items-start gap-3">
                       <CheckCircle className="w-6 h-6 text-green-500 flex-shrink-0 mt-1" />
-                      <span className="text-gray-700">Facilidade de acesso: pratique de qualquer lugar, a qualquer hora.</span>
+                      <span className="text-gray-700 dark:text-gray-300">Facilidade de acesso: pratique de qualquer lugar, a qualquer hora.</span>
                     </div>
                     <div className="flex items-start gap-3">
                       <CheckCircle className="w-6 h-6 text-green-500 flex-shrink-0 mt-1" />
-                      <span className="text-gray-700">Avaliação detalhada de suas habilidades de memória e foco.</span>
+                      <span className="text-gray-700 dark:text-gray-300">Avaliação detalhada de suas habilidades de memória e foco.</span>
                     </div>
                     <div className="flex items-start gap-3">
                       <CheckCircle className="w-6 h-6 text-green-500 flex-shrink-0 mt-1" />
-                      <span className="text-gray-700">Seu perfil cognitivo personalizado de pontos fortes e fracos.</span>
+                      <span className="text-gray-700 dark:text-gray-300">Seu perfil cognitivo personalizado de pontos fortes e fracos.</span>
                     </div>
                     <div className="flex items-start gap-3">
                       <CheckCircle className="w-6 h-6 text-green-500 flex-shrink-0 mt-1" />
-                      <span className="text-gray-700">Estratégias especializadas para aumentar a concentração, a energia mental e a recordação.</span>
+                      <span className="text-gray-700 dark:text-gray-300">Estratégias especializadas para aumentar a concentração, a energia mental e a recordação.</span>
                     </div>
                     <div className="flex items-start gap-3">
                       <CheckCircle className="w-6 h-6 text-green-500 flex-shrink-0 mt-1" />
-                      <span className="text-gray-700">Garantia de devolução do dinheiro.</span>
+                      <span className="text-gray-700 dark:text-gray-300">Garantia de devolução do dinheiro.</span>
                     </div>
                   </div>
 
                   {/* Seção de Garantia */}
-                  <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-lg p-6 border border-green-200">
+                  <div className="bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-900/30 dark:to-blue-900/30 rounded-lg p-6 border border-green-200 dark:border-green-700">
                     <div className="flex flex-col md:flex-row items-center gap-6">
                       <div className="flex-shrink-0">
                         <img 
@@ -821,13 +823,13 @@ export default function Home() {
                         />
                       </div>
                       <div className="text-center md:text-left">
-                        <h3 className="text-2xl font-bold text-green-800 mb-2">
+                        <h3 className="text-2xl font-bold text-green-800 dark:text-green-300 mb-2">
                           Garantia de 7 Dias
                         </h3>
-                        <p className="text-gray-700 mb-4">
+                        <p className="text-gray-700 dark:text-gray-300 mb-4">
                           Acreditamos que o nosso plano pode funcionar para si e obterá resultados visíveis dentro de 4 semanas!
                         </p>
-                        <p className="text-gray-700 font-semibold">
+                        <p className="text-gray-700 dark:text-gray-300 font-semibold">
                           Estamos até prontos para devolver o seu dinheiro se não vir resultados visíveis e puder demonstrar que seguiu o nosso plano.
                         </p>
                       </div>
