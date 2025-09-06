@@ -552,20 +552,8 @@ export default function Home() {
                 </p>
               </div>
 
-              {/* Video Sales Letter */}
-              <Card className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm shadow-xl border-gray-200 dark:border-gray-700">
-                <CardContent className="p-8">
-                  <div className="aspect-video rounded-lg overflow-hidden shadow-lg">
-                    <iframe 
-                      src="https://player.vimeo.com/video/1115923584?h=7b8e4b4e1e&title=0&byline=0&portrait=0" 
-                      className="w-full h-full"
-                      frameBorder="0" 
-                      allow="autoplay; fullscreen; picture-in-picture" 
-                      allowFullScreen
-                    ></iframe>
-                  </div>
-                </CardContent>
-              </Card>
+              {/* Video Sales Letter - Removido */}
+              {/* A seção de VSL foi removida conforme solicitado */}
 
               {/* Resultados Comparativos */}
               <Card className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm shadow-xl border-gray-200 dark:border-gray-700">
