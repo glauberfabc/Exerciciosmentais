@@ -222,6 +222,8 @@ export default function Home() {
   const [showConfetti, setShowConfetti] = useState(false)
   const [notifications, setNotifications] = useState<Array<{ id: number; name: string }>>([])
   const [notificationId, setNotificationId] = useState(0)
+  const [notifications, setNotifications] = useState<Array<{ id: number; name: string }>>([])
+  const [notificationId, setNotificationId] = useState(0)
 
   // Sons - usando o Audio API para sons simples
   const playSound = (type: 'click' | 'correct' | 'wrong' | 'champion') => {
@@ -285,6 +287,29 @@ export default function Home() {
       return () => clearInterval(timer)
     }
   }, [currentStep])
+
+  // Efeito para as notificações de compra
+  useEffect(() => {
+    if (currentStep === 'offer') {
+      const interval = setInterval(() => {
+        const randomName = randomNames[Math.floor(Math.random() * randomNames.length)]
+        const newNotification = {
+          id: notificationId,
+          name: randomName
+        }
+        
+        setNotifications(prev => [...prev, newNotification])
+        setNotificationId(prev => prev + 1)
+      }, 40000) // 40 segundos
+
+      return () => clearInterval(interval)
+    }
+  }, [currentStep, notificationId])
+
+  // Função para remover notificação
+  const removeNotification = useCallback((id: number) => {
+    setNotifications(prev => prev.filter(notification => notification.id !== id))
+  }, [])
 
   // Efeito para as notificações de compra
   useEffect(() => {
@@ -725,6 +750,34 @@ export default function Home() {
                     </div>
                   </div>
 
+                  {/* Card da Área de Membros */}
+                  <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/30 dark:to-purple-900/30 rounded-lg p-6 border border-blue-200 dark:border-blue-700">
+                    <div className="flex items-start gap-4">
+                      <div className="flex-shrink-0">
+                        <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center">
+                          <BookOpen className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                        </div>
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="text-xl font-bold text-blue-800 dark:text-blue-300 mb-2">
+                          🎯 Conheça nossa Área de Membros - Versão Demonstração
+                        </h3>
+                        <p className="text-gray-700 dark:text-gray-300 mb-4">
+                          Acesse nossa biblioteca digital atualizada diariamente com novidades de <strong>Livros</strong>, <strong>Aulas</strong> e <strong>Audiolivros</strong> para potencializar ainda mais seu treinamento mental!
+                        </p>
+                        <div className="bg-white/80 dark:bg-gray-800/80 rounded-lg p-3 mb-4 text-sm">
+                          <p className="font-semibold text-gray-800 dark:text-gray-200">Dados para acesso demo:</p>
+                          <p className="text-gray-600 dark:text-gray-400">📧 Email: <code className="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">demo@demo.com</code></p>
+                          <p className="text-gray-600 dark:text-gray-400">🔑 Senha: <code className="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">123456</code></p>
+                        </div>
+                        <Button onClick={() => window.open('https://bibliotecadigital-jade.vercel.app/', '_blank')} className="bg-blue-600 hover:bg-blue-700 text-white">
+                          <ExternalLink className="w-4 h-4 mr-2" />
+                          Acessar Área de Membros
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+
                   {/* Velocidade de Raciocínio */}
                   <div className="space-y-4">
                     <h3 className="text-xl font-semibold text-gray-800 flex items-center gap-2">
@@ -978,6 +1031,22 @@ export default function Home() {
           )}
         </AnimatePresence>
       </div>
+      
+      {/* Notificações de compra */}
+      <div className="fixed bottom-6 right-6 z-30 space-y-3">
+        <AnimatePresence>
+          {notifications.map((notification) => (
+            <PurchaseNotification
+              key={notification.id}
+              name={notification.name}
+              onClose={() => removeNotification(notification.id)}
+            />
+          ))}
+        </AnimatePresence>
+      </div>
+
+      {/* Botão WhatsApp */}
+      <WhatsAppButton />
       
       {/* Notificações de compra */}
       <div className="fixed bottom-6 right-6 z-30 space-y-3">
