@@ -578,14 +578,20 @@ export default function Home() {
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-8">
-                  {/* Imagem de Resultados */}
+                  {/* Vídeo do Wistia */}
                   <div className="space-y-4">
-                    <div className="rounded-lg overflow-hidden shadow-lg">
-                      <img 
-                        src="https://media.inlead.cloud/uploads/22540/2025-08-10/lg-VwvJq-results-frame46d391f6.png" 
-                        alt="Resultados do teste de memória e foco" 
-                        className="w-full h-auto object-cover"
-                      />
+                    <div className="aspect-video rounded-lg overflow-hidden shadow-lg">
+                      <script src="https://fast.wistia.com/player.js" async></script>
+                      <script src="https://fast.wistia.com/embed/tugpox9rno.js" async type="module"></script>
+                      <style>{`
+                        wistia-player[media-id='tugpox9rno']:not(:defined) { 
+                          background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/tugpox9rno/swatch'); 
+                          display: block; 
+                          filter: blur(5px); 
+                          padding-top:56.25%; 
+                        }
+                      `}</style>
+                      <wistia-player media-id="tugpox9rno" aspect="1.7777777777777777"></wistia-player>
                     </div>
                   </div>
                   {/* Velocidade de Raciocínio */}
